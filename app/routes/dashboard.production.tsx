@@ -17,14 +17,14 @@ export default function ProductionContent() {
   const columns = [
     { field: "id", headerName: "ID", width: 300 },
     { field: "product", headerName: "Product", width: 300 },
-    { field: "date", headerName: "Date", width: 300 },
+    { field: "orderNumber", headerName: "Order Number", width: 300 },
     { field: "jigboardPLS", headerName: "Jigboard PLS", width: 300 },
     { field: "jigboardType", headerName: "Jigboard Type", width: 300 },
     { field: "fixedString", headerName: "Fixed String", width: 300 },
     { field: "liveString", headerName: "Live String", width: 300 },
     { field: "work", headerName: "Work", width: 300 },
+    { field: "date", headerName: "Date", width: 300 },
     { field: "dateFinished", headerName: "Date Finished", width: 300 },
-    { field: "orderNumber", headerName: "Order Number", width: 300 }
   ];
 
   useEffect(()=>{
@@ -131,6 +131,7 @@ export default function ProductionContent() {
           selectedData={selected}
           onDeleteClick={handleDeleteClick}
           filterColumn="work"
+          showDeleteColumn={false}
         />
           </Box>
       </Grid>

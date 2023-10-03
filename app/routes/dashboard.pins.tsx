@@ -124,6 +124,7 @@ export default function PinsContent() {
              selectedData={selected} 
              onDeleteClick={handleDeleteClick}
              filterColumn='jigboard'
+             showDeleteColumn={false}
              />
           </Box>
         </Grid>

@@ -10,6 +10,11 @@ interface CustomDataGridProps {
   onDeleteClick?: (id: number) => void;
   selectedData: any | null; // seçili ürünü alacak
   filterColumn:any;
+  showDeleteColumn?: boolean;
+}
+
+CustomDataGrid.defaultProps={
+  showDeleteColumn: true,
 }
 
 export default function CustomDataGrid(props: CustomDataGridProps) {
@@ -27,18 +32,21 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
     return data.filter((item: any) => item[filterColumn] === selectedData);
   }
 
-  const columnsWithDelete = [...props.columns,{
-    field: "delete",
-    headerName: "Action",
-    width:100,
-    renderCell:(params:any) => (
-      <DeleteIcon 
-          onClick={()=>handleDeleteClick((params as any).row!.id)}
-          
-      />
-     
-    ),
-  }];
+  const columns = [...props.columns];
+  if (props.showDeleteColumn) {
+    columns.push({
+      field: "delete",
+      headerName: "Action",
+      width:100,
+      renderCell:(params:any) => (
+        <DeleteIcon 
+            onClick={()=>handleDeleteClick((params as any).row!.id)}
+            
+        />
+      ),
+    });
+  }
+
 
 
   return (
@@ -46,7 +54,8 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
       <Box sx={{ height: 400, width: "100%" }}>
         <DataGrid 
         rows={filterData(props.data, props.selectedData, props.filterColumn)} // seçili ürüne göre filtrelenmiş veri
-        columns={columnsWithDelete} 
+        columns={columns} 
+        
         disableRowSelectionOnClick 
          />
       </Box>

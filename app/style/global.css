@@ -1,0 +1,9 @@
+body {
+  overflow: hidden;  /*  veya istediğiniz diğer overflow ayarları */
+}
+color{
+  background-color: #271D50;
+  background-color: #5B66E3;
+  background-color: grey;
+  background-color: #363c83;
+}

@@ -1,0 +1,38 @@
+{
+  "/codes/getAllCodes": "/codes",
+  "/codes/getCodeById/:id": "/codes/:id",
+  "/codes/createCode": "/codes",
+  "/codes/updateCode/:id": "/codes/:id",
+  "/codes/deleteCode/:id": "/codes/:id",
+  "/codes/deleteAllCodes" : "/codes/deleteAllCodes",
+
+
+  "/connectors/getAllConnectors": "/connectors",
+  "/connectors/getConnectorById/:id": "/connectors/:id",
+  "/connectors/createConnectors": "/connectors",
+  "/connectors/updateConnectors/:id": "/connectors/:id",
+  "/connectors/deleteConnectors/:id": "/connectors/:id",
+  "/connectors/deleteAllConnectors" : "/connectors/deleteAllConnectors",
+
+  "/variablesLength/getAllVariablesLength": "/variablesLength",
+  "/variablesLength/getAllVariablesLengthById/:id": "/variablesLength/:id",
+  "/variablesLength/createVariablesLength": "/variablesLength",
+  "/variablesLength/updateVariablesLength/:id": "/variablesLength/:id",
+  "/variablesLength/deleteVariablesLength/:id":  "/variablesLength/:id",
+  "/variablesLength/deleteAllVariablesLength" : "/variablesLength/deleteAllVariablesLength",
+
+  "/pins/getAllPins": "/pins",
+  "/pins/getPinsById/:id": "/pins/:id",
+  "/pins/createPins": "/pins",
+  "/pins/updatePins/:id": "/pins/:id",
+  "/pins/deletePins/:id": "/pins/:id",
+  "/pins/deleteAllPins": "/pins/deleteAllCodes",
+
+  "/production/getAllProduction": "/production",
+  "/production/getProductionById/:id": "/production/:id",
+  "/production/createProduction": "/production",
+  "/production/updateProduction/:id": "/production/:id",
+  "/production/deleteProduction/:id": "/production/:id",
+  "/production/deleteAllProduction": "/production/deleteAllProduction"
+}
+

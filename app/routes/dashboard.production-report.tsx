@@ -1,5 +1,8 @@
 import ProductionReportIcon from '@mui/icons-material/AssessmentOutlined';
 import { Box, Grid } from "@mui/material";
+import type { DateRange } from '@mui/x-date-pickers-pro';
+import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from "react";
 import ActionButton from '~/src/components/ActionButton';
 import AutocompleteSearch from '~/src/components/AutoCompleteSearch';
@@ -8,13 +11,18 @@ import CustomDataGrid from '~/src/components/CustomDataGrid';
 import CustomDatePickers from '~/src/components/CustomDatePickers';
 import type ProductionModel from "~/src/core/models/ProductionModel";
 import ServiceManager from "~/src/core/services/ServiceManager";
-
-export default function ProductionReportContent() {
+interface ProductionReportContentProps{
+  
+}
+export default function ProductionReportContent(props: ProductionReportContentProps) {
   const productionService = useMemo(() => ServiceManager.getProductionService(),[]);
   const [productions, setProductions] = useState<ProductionModel[]>([]);
   const [work, setWork] = useState<string[]>([]);
   const [selected, setSelected] = useState<any | null>(null);
-
+  const [selectedDateRange, setSelectedDateRange] = useState<DateRange<Dayjs>>([
+    dayjs('2000-01-01T15:30'),
+    dayjs('2023-04-21T18:30'),
+  ]);
   const columns = [
     { field: "id", headerName: "ID", width: 300 },
     { field: "product", headerName: "Product", width: 300 },
@@ -73,6 +81,11 @@ export default function ProductionReportContent() {
       console.error("Silme işlemi başarısız", errorMessage);
     }
   }
+    // CustomDatePickers bileşeninden gelen tarih aralığını yakalama işlevi
+    const handleDateRangeSelect = (newDateRange: DateRange<Dayjs>) => {
+      
+      setSelectedDateRange(newDateRange);
+    };
   return (
     <>
     <Box
@@ -99,8 +112,9 @@ export default function ProductionReportContent() {
         justifyContent:'space-evenly'
       }}
     >
-      <CustomDatePickers />
-
+     {/* Component */}
+      <CustomDatePickers  onDateSelect={handleDateRangeSelect} onSelectedDate={selectedDateRange}/>
+    {/* Component */}
       <AutocompleteSearch 
         label='Line Search'
         data={work}
@@ -138,7 +152,8 @@ export default function ProductionReportContent() {
           selectedData={selected}
           onDeleteClick={handleDeleteClick}
           filterColumn="work"
-          showDeleteColumn={false}
+          showDeleteColumn={false}          
+          selectedDate={selectedDateRange} // Seçilen tarih aralığını ileterek
         />
           </Box>
       </Grid>

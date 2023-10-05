@@ -33,6 +33,12 @@
   "/production/createProduction": "/production",
   "/production/updateProduction/:id": "/production/:id",
   "/production/deleteProduction/:id": "/production/:id",
-  "/production/deleteAllProduction": "/production/deleteAllProduction"
+  "/production/deleteAllProduction": "/production/deleteAllProduction",
+
+  "/users/getAllUsers": "/users",
+  "/users/getUsersById/:id": "/users/:id",
+  "/users/createUser": "/users",
+  "/users/updateUser/:id": "/users/:id",
+  "/users/deleteUser/:id": "/users/:id"
 }
 

@@ -1,4 +1,48 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "name": "st",
+      "password":"st_psw",
+      "permission": "super_user",
+      "image": "..."
+    },
+    {
+      "id": 2,
+      "name": "elopar",
+      "password":"elopar_psw",
+      "permission": "maintenance",
+      "image": "..."
+    },
+    {
+      "id": 3,
+      "name": "baris",
+      "password":"baris_psw",
+      "permission": "super_user",
+      "image": "..."
+    },
+    {
+      "id": 4,
+      "name": "user",
+      "password":"test_psw",
+      "permission": "user",
+      "image": "..."
+    },
+    {
+      "id": 5,
+      "name": "super-user",
+      "password":"test_psw",
+      "permission": "super_user",
+      "image": "..."
+    },
+    {
+      "id": 6,
+      "name": "maintenance",
+      "password":"test_psw",
+      "permission": "maintenance",
+      "image": "..."
+    }
+  ],
   "codes": [
     {
       "id": 72727040743,
@@ -1491,6 +1535,38 @@
           "method": "DELETE",
           "path": "/production/deleteAllProduction"
         }
+      },
+      "getAllUsers":{
+        "method": "GET",
+        "path": "/users"
+      },
+      "getUsersById":{
+        "method": "GET",
+        "path": "/users/:id"
+      },
+      "createUser":{
+        "method": "POST",
+        "path": "/users",
+        "body": {
+          "name": "string",
+          "password":"string",
+          "permission": "string",
+          "image": "string"
+        }
+      },
+      "updateUser": {
+        "method": "PUT",
+        "path": "/users/:id",
+        "body": {
+          "name": "string",
+          "password":"string",
+          "permission": "string",
+          "image": "string"
+        }
+      },
+      "deleteUser": {
+        "method": "DELETE",
+        "path": "/users/deleteUser/:id"
       }
     }
   }

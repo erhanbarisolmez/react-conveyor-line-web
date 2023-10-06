@@ -1567,6 +1567,10 @@
       "deleteUser": {
         "method": "DELETE",
         "path": "/users/deleteUser/:id"
+      },
+      "authUsers":{
+        "method":"GET",
+        "path": "/users/authUsers/:permission"
       }
     }
   }

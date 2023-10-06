@@ -3,10 +3,10 @@ import axios from 'axios';
 import type { ICodesService } from '~/src/core/interface/ICodesService';
 import type CodesModel from '~/src/core/models/CodesModel';
 
-export enum  CodesServiceAxiosPath {
+export enum CodesServiceAxiosPath {
   BASE_URL ='http://localhost:3001/codes',
   GET_ALL='/getAllCodes',
-  POST_BY_ID='/getCodeById/',
+  GET_BY_ID='/getCodeById/',
   CREATE ='/createCode',
   UPDATE ='/updateCode/',
   DELETE='/deleteCode/'
@@ -17,7 +17,6 @@ export enum CodesServiceErrorPath {
   GET_Create_ERROR = '/error-code/create',
   GET_Update_ERROR = '/error-code/update',
   GET_Delete_ERROR = '/error-code/delete/:id',
-
 }
 
 export class CodesService implements ICodesService {
@@ -45,11 +44,11 @@ export class CodesService implements ICodesService {
 
   async getById(id: number): Promise<CodesModel[] | undefined> {
     try {
-      const response = await this.axios.get(`${CodesServiceAxiosPath.GET_ALL}`);
+      const response = await this.axios.get(`${CodesServiceAxiosPath.GET_BY_ID}${id}`);
       this.codes = response.data;
       return this.codes;
     } catch (error) {
-      throw new  CodesServiceError(CodesServiceErrorPath.GET_All_ERROR);
+      throw new  CodesServiceError(CodesServiceErrorPath.GET_ById_ERROR);
     }
   }
 

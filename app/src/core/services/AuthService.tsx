@@ -1,10 +1,11 @@
 import type { AxiosInstance } from "axios";
+import axios from "axios";
 import type IAuthService from "../interface/IAuthService";
 import type UsersModel from "../models/UsersModel";
 
 export enum AuthServiceAxiosPath{
-  BASE_URL = '',
-  POST_LOGIN = '',
+  BASE_URL = 'http://localhost:3001',
+  POST_LOGIN = '/users/',
   POST_LOGOUT = '',
   GET_isAUTHENTICATED = '',
   POST_REGISTER = '',
@@ -12,7 +13,7 @@ export enum AuthServiceAxiosPath{
 }
 
 export enum AuthServiceErrorPath{
-  POST_LOGIN_ERROR = '',
+  POST_LOGIN_ERROR = '/error-login/:all',
   POST_LOGOUT_ERROR = '',
   GET_isAUTHENTICATED_ERROR = '',
   POST_REGISTER_ERROR = '',
@@ -22,8 +23,33 @@ export enum AuthServiceErrorPath{
 export class AuthService implements IAuthService{
   private axios! : AxiosInstance;
   private users: UsersModel[] = [];
-  login(username: string, password: string): Promise<any> {
-    throw new Error("Method not implemented.");
+
+  constructor(){
+    this.loadAuth();
+  }
+  private async loadAuth(): Promise<void>{
+    this.axios = axios.create({
+      baseURL: AuthServiceAxiosPath.BASE_URL,
+    });
+  }
+
+  async login(username: string, password: string): Promise<UsersModel | null> {
+    try {
+      const response = await this.axios.get(AuthServiceAxiosPath.POST_LOGIN);
+      const users = response.data;
+      console.log("response from server: ", response.data);
+      const authenticatedUser = users.find((user:any) => user.name === username && user.password === password);
+      console.log("response from auth: ", authenticatedUser);
+
+      if (authenticatedUser) {
+        return authenticatedUser;
+        
+      } else {
+        throw new Error('Invalid credentials');
+      }
+    } catch (error) {
+      throw new AuthServiceError('Authentication failed asd');
+    }
   }
   logout(token: string): Promise<void> {
     throw new Error("Method not implemented.");
@@ -38,4 +64,11 @@ export class AuthService implements IAuthService{
     throw new Error("Method not implemented.");
   }
 
+}
+
+class AuthServiceError extends Error{
+  constructor(message: string){
+    super(message);
+    this.name = "AuthServiceError";
+  }
 }

@@ -4,5 +4,5 @@ Linting with ESLint
 Static Types with TypeScript
 Json-Server
 
-nm run dev
+npm run dev
 npx json-server --watch app/data/api/api.json --routes app/data/api/routes.json --port 3001

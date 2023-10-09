@@ -40,5 +40,5 @@
   "/users/createUser": "/users",
   "/users/updateUser/:id": "/users/:id",
   "/users/deleteUser/:id": "/users/:id",
-  "/users/authUsers/:permission": "/authUsers?permission=:permission"}
+  "/users/authUsers/:name": "/authUsers/:name"}
 

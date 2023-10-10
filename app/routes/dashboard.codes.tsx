@@ -141,6 +141,7 @@ export default function CodesContent() {
            selectedData={selected}
            onDeleteClick={handleDeleteClick}  
            filterColumn="product"
+           showAddColumn={false}
            />
         </Box>
       </Grid>

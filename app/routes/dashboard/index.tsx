@@ -7,6 +7,7 @@ import VariablesLengthIcon from '@mui/icons-material/HubOutlined';
 import XVKTestIcon from '@mui/icons-material/InventoryOutlined';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
+import UsersIcon from '@mui/icons-material/PeopleAltOutlined';
 import ProductionIcon from '@mui/icons-material/PrecisionManufacturingOutlined';
 import ConnectorsIcon from '@mui/icons-material/SettingsInputCompositeOutlined';
 import PinsIcon from '@mui/icons-material/SettingsInputHdmiOutlined';
@@ -127,7 +128,8 @@ export default function DashboardIndex() {
     { text: "Production", icon: <ProductionIcon />, route: "production"},
     { text: "Production Report", icon: < ProductionReportIcon/>, route: "production-report"},
     { text: "Wecos Resume", icon: <WecosResumeIcon/>, route: "wecos-resume"},
-    { text: "XVK Test", icon: <XVKTestIcon />, route: "XVKTest"}
+    { text: "XVK Test", icon: <XVKTestIcon />, route: "XVKTest"},
+    { text: "Users", icon: <UsersIcon />, route: "users"}
   ];
 
 const navigate = useNavigate();

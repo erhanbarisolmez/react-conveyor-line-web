@@ -6,6 +6,7 @@ import { AuthService } from './AuthService';
 import { ConnectorsService } from './ConnectorsService';
 import PinsService from './PinsService';
 import ProductionService from './ProductionService';
+import UsersService from './UsersService';
 import VariablesLengthService from './VariablesLengthService';
 
 class ServiceManager {
@@ -15,6 +16,7 @@ class ServiceManager {
   variablesLengthService = new VariablesLengthService();
   pinsService = new PinsService();
   productionService = new ProductionService();
+  usersService = new UsersService();
   csvGenerateService = new CSVService();
   pdfGenerateService = new PDFService();
   deleteAllGenerateService = new DeleteAllService();
@@ -34,6 +36,9 @@ class ServiceManager {
   }
   getProductionService(){
     return this.productionService;
+  }
+  getUsersService(){
+    return this.usersService;
   }
   getCSVGenerateService(){
     return this.csvGenerateService;

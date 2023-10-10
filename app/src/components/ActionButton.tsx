@@ -34,10 +34,7 @@ const { downloadCSV, downloadPDF, deleteAll, data, titleDownloadCSV, titleDownlo
 
   return (
     <>
-    <Box>
-      
-    </Box>
-
+    
     <Box sx={{ position: 'relative', top: '0', right: '0', p:2}}>
 
           <Button onClick={handleDownloadCSV} > 

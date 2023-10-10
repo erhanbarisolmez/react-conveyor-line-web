@@ -133,7 +133,9 @@ export default function VariablesLengthContent() {
                 columns={columns} 
                 selectedData={selected}
                 onDeleteClick={handleDeleteClick}  
-                filterColumn='product'          
+                filterColumn='product'     
+                showDeleteColumn={true}
+                showAddColumn={false}
                 />
               </Box>
              </Grid>

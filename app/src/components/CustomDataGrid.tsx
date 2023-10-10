@@ -1,4 +1,6 @@
+import ContentPasteSearchOutlinedIcon from '@mui/icons-material/ContentPasteSearchOutlined';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import type { GridColDef } from "@mui/x-data-grid";
@@ -10,14 +12,18 @@ interface CustomDataGridProps {
   data: any[];
   columns: GridColDef[];
   onDeleteClick?: (id: number) => void;
-  selectedData: any | null; // seçili ürünü alacak
+  selectedData?: any | null; // seçili ürünü alacak
   filterColumn:any;
   showDeleteColumn?: boolean;
+  showAddColumn?: boolean;
+  showCheckColumn?: boolean;
   selectedDate?: DateRange<Dayjs>; // seçilii tarihi alacak
 }
 
 CustomDataGrid.defaultProps={
   showDeleteColumn: true,
+  showAddColumn: false,
+  showCheckColumn: false,
 }
 
 export default function CustomDataGrid(props: CustomDataGridProps) {
@@ -75,11 +81,36 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
       width:100,
       renderCell:(params:any) => (
         <DeleteIcon 
-            onClick={()=>handleDeleteClick((params as any).row!.id)}
-            
+            onClick={()=>handleDeleteClick((params as any).row!.id)}  
         />
       ),
     });
+  }
+
+  if(props.showAddColumn){
+    columns.push({
+      field:'edit',
+      headerName: 'Edit',
+      width:100,
+      renderCell:(params:any) => (
+        <EditNoteOutlinedIcon 
+          onClick = {() => handleUsersAddClick((params as any).row!.id)}
+        />
+      ),
+    })
+  }
+
+  if(props.showCheckColumn){
+    columns.push({
+      field:'check',
+      headerName: 'Check',
+      width:100,
+      renderCell:(params:any) => (
+        <ContentPasteSearchOutlinedIcon 
+          onClick = {() => handleUsersAddClick((params as any).row!.id)}
+        />
+      ),
+    })
   }
 
   return (
@@ -94,3 +125,7 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
     </Stack>
   );
 }
+function handleUsersAddClick(id: any): void {
+  throw new Error('Function not implemented.');
+}
+

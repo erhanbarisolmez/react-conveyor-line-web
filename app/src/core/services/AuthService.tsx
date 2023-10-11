@@ -8,7 +8,7 @@ export enum AuthServiceAxiosPath{
   POST_LOGIN = '/users/',
   POST_LOGOUT = '',
   GET_isAUTHENTICATED = '',
-  POST_REGISTER = '',
+  POST_REGISTER = '/users/authCreateUser/',
   POST_CHANGE_PASSWORD = ''
 }
 
@@ -16,7 +16,7 @@ export enum AuthServiceErrorPath{
   POST_LOGIN_ERROR = '/error-login/:all',
   POST_LOGOUT_ERROR = '',
   GET_isAUTHENTICATED_ERROR = '',
-  POST_REGISTER_ERROR = '',
+  POST_REGISTER_ERROR = '/error-register',
   POST_CHANGE_PASSWORD_ERROR = ''
 }
 
@@ -57,8 +57,17 @@ export class AuthService implements IAuthService{
   isAuthenticated(token: string): Promise<boolean> {
     throw new Error("Method not implemented.");
   }
-  register(user: UsersModel): Promise<UsersModel> {
-    throw new Error("Method not implemented.");
+  async register(user: UsersModel): Promise<UsersModel> {
+    try {
+      if (user.permission ! == 'super_user') {
+        throw new Error('only super_user can perform this action.');
+      }
+      const response = await this.axios.post(AuthServiceAxiosPath.POST_REGISTER, user);
+      const newUser = response.data;
+      return newUser;
+    } catch (error) {
+      throw new AuthServiceError(AuthServiceAxiosPath.POST_REGISTER);
+    }
   }
   changePassword(username: string, newPassword: string): Promise<void> {
     throw new Error("Method not implemented.");

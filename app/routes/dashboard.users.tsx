@@ -9,7 +9,10 @@ import ServiceManager from '~/src/core/services/ServiceManager';
 
 export default function UsersContent() {
   const usersService =  useMemo(() => ServiceManager.getUsersService(), []);
+  const authService = useMemo(() => ServiceManager.getAuthService(), []);
   const [users, setUsers] = useState<UsersModel[]>([]);
+  const [permission, setPermission] = useState<string[]>([]);
+  const [selected, setSelected] = useState<any | null>(null);
   const columns = [
     { field: "id", headerName: "ID", width: 300 },
     { field: "name", headerName: "Name", width: 300 },
@@ -21,10 +24,22 @@ export default function UsersContent() {
         const users = await usersService.getAll();
         setUsers(users);
 
+        const permissionName = users.map((user) => user.permission);
+        setPermission(permissionName);
       }
       getUsers();
     }
   }, [usersService]);
+  
+  const addUser = async (newUser:any) => {
+    try {
+      const addedUser = await authService.register(newUser);
+
+      setUsers((prevUsers) => [...prevUsers, addedUser]);
+    } catch (error: any) {
+      console.error('only super_user can perform this action. ',error.message);
+    }
+  }
 
 
   return (
@@ -47,13 +62,18 @@ export default function UsersContent() {
          />
      
         {/* Component */}
-        <Box sx={{ml:0, mb:6, mt:3}}>
+        <Box sx={{ml:0, mb:4, mt:3}}>
            <DialogAddUser 
             dialogTitle={'Add User'}
             open={false}
             onClose={function (): void {
               throw new Error('Function not implemented.');
-            } } 
+            } }
+            data={permission}
+            selected={selected}
+            onDataSelect={setSelected} 
+            onUserAdd={addUser} 
+
             />
           </Box>
         <Grid container spacing={2}>
@@ -66,7 +86,7 @@ export default function UsersContent() {
             <CustomDataGrid 
              columns={columns} 
              data={users} 
-             filterColumn='jigboard'
+             filterColumn=''
              showAddColumn={true}
              showDeleteColumn={false}
              />

@@ -8,6 +8,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import type { DateRange } from '@mui/x-date-pickers-pro';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
+
 interface CustomDataGridProps {
   data: any[];
   columns: GridColDef[];
@@ -27,12 +28,15 @@ CustomDataGrid.defaultProps={
 }
 
 export default function CustomDataGrid(props: CustomDataGridProps) {
- 
-    const handleDeleteClick = (id:number) => {
+
+  const handleDeleteClick = (id:number) => {
     if (props && props.onDeleteClick) {
       props.onDeleteClick(id);
     }
   };
+  function handleUsersAddClick(id: any): void {
+  
+  }
 
   const filterData = (
     data: any[],
@@ -125,7 +129,5 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
     </Stack>
   );
 }
-function handleUsersAddClick(id: any): void {
-  throw new Error('Function not implemented.');
-}
+
 

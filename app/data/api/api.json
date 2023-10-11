@@ -41,6 +41,26 @@
       "password": "test_psw",
       "permission": "maintenance",
       "image": "..."
+    },
+    {
+      "id": 7,
+      "name": "post",
+      "password": "post",
+      "permission": "maintenance",
+      "image": "..."
+    },
+    {
+      "id": 8,
+      "name": "post",
+      "password": "post",
+      "permission": "maintenance",
+      "image": "..."
+    },
+    {
+      "name": "e",
+      "password": "e",
+      "permission": "maintenance",
+      "id": 9
     }
   ],
   "codes": [
@@ -1570,7 +1590,16 @@
       },
       "authUsers": {
         "method": "GET",
-        "path": "/users/authUsers/:name"
+        "path": "/users"
+      },
+      "authCreateUser": {
+        "method": "POST",
+        "path": "/users",
+        "body": {
+          "name": "string",
+          "password": "string",
+          "permission": "string"
+        }
       }
     }
   }

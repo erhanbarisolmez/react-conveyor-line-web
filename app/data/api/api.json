@@ -55,12 +55,6 @@
       "password": "post",
       "permission": "maintenance",
       "image": "..."
-    },
-    {
-      "name": "e",
-      "password": "e",
-      "permission": "maintenance",
-      "id": 9
     }
   ],
   "codes": [

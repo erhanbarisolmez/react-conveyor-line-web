@@ -23,9 +23,10 @@ export default function UsersContent() {
       async function getUsers() {
         const users = await usersService.getAll();
         setUsers(users);
-
-        const permissionName = users.map((user) => user.permission);
-        setPermission(permissionName);
+        // permissionName sadece 1 kez dönmesi için new set ya da distinct kullanılabilir. Distinct aynı verilerden 1 tanesini alarak dizi oluşturur. new set kümeler.
+        const permissionName = new Set(users.map((user) => user.permission));
+        const permissionArray = Array.from(permissionName);
+        setPermission(permissionArray);
       }
       getUsers();
     }
@@ -34,14 +35,16 @@ export default function UsersContent() {
   const addUser = async (newUser:any) => {
     try {
       const addedUser = await authService.register(newUser);
-
       setUsers((prevUsers) => [...prevUsers, addedUser]);
     } catch (error: any) {
-      console.error('only super_user can perform this action. ',error.message);
+      console.error('only super_user can perform this action.',error.message);
     }
   }
 
-
+  const userEditFunction = async (id: any ) => {
+      console.log(id);
+  }
+ 
   return (
     <>
       <Box
@@ -73,7 +76,6 @@ export default function UsersContent() {
             selected={selected}
             onDataSelect={setSelected} 
             onUserAdd={addUser} 
-
             />
           </Box>
         <Grid container spacing={2}>
@@ -87,8 +89,9 @@ export default function UsersContent() {
              columns={columns} 
              data={users} 
              filterColumn=''
-             showAddColumn={true}
+             showEditColumn={true}
              showDeleteColumn={false}
+             onShowEdit={userEditFunction}
              />
           </Box>
         </Grid>

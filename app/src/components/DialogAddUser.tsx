@@ -20,8 +20,8 @@ interface DialogProps{
   selected: any | null;
   onDataSelect: (selectedData:any | null) => void; // seçili ürünü
   onUserAdd: (newUser: any) => void; // Kullanıcı ekleme işlevi
-  
 }
+
 export default function FormDialog(props:DialogProps) {
   const {
     dialogTitle='title',
@@ -29,11 +29,12 @@ export default function FormDialog(props:DialogProps) {
     onDataSelect,
     data,
     selected,
-    onUserAdd
+    onUserAdd,
    } = props;
   const [open, setOpen] = React.useState(false);
   const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -41,20 +42,23 @@ export default function FormDialog(props:DialogProps) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const formIsValid =()=>{
+    return userName && password && selected;
+  }
   const handleSave = () => {
-    //name ve password null kontrolü yap
-    const newUser = {
-      name: userName,
-      password: password,
-      permission: selected
+    if (formIsValid()){
+      const newUser = {
+        name: userName,
+        password: password,
+        permission: selected
+      }
+      onUserAdd(newUser);
+      alert("Success");
+    }else{
+      alert("Please fill all fields");
     }
-    onUserAdd(newUser);
     setUsername('');
     setPassword('');
-    console.log(setUsername);
-    console.log(setPassword);
-    console.log(newUser);
     handleClose();
   }
 

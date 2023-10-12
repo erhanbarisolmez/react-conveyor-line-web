@@ -13,10 +13,11 @@ interface CustomDataGridProps {
   data: any[];
   columns: GridColDef[];
   onDeleteClick?: (id: number) => void;
+  onShowEdit?: (id:number) => void;
   selectedData?: any | null; // seçili ürünü alacak
   filterColumn:any;
   showDeleteColumn?: boolean;
-  showAddColumn?: boolean;
+  showEditColumn?: boolean;
   showCheckColumn?: boolean;
   selectedDate?: DateRange<Dayjs>; // seçilii tarihi alacak
 }
@@ -34,8 +35,10 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
       props.onDeleteClick(id);
     }
   };
-  function handleUsersAddClick(id: any): void {
-  
+  function handleUsersEditClick(id: any): void {
+    if (props && props.onShowEdit) {
+      props.onShowEdit(id);
+    }
   }
 
   const filterData = (
@@ -91,14 +94,14 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
     });
   }
 
-  if(props.showAddColumn){
+  if(props.showEditColumn){
     columns.push({
       field:'edit',
       headerName: 'Edit',
       width:100,
       renderCell:(params:any) => (
         <EditNoteOutlinedIcon 
-          onClick = {() => handleUsersAddClick((params as any).row!.id)}
+          onClick = {() => handleUsersEditClick((params as any).row!.id)}
         />
       ),
     })
@@ -111,7 +114,7 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
       width:100,
       renderCell:(params:any) => (
         <ContentPasteSearchOutlinedIcon 
-          onClick = {() => handleUsersAddClick((params as any).row!.id)}
+          onClick = {() => handleUsersEditClick((params as any).row!.id)}
         />
       ),
     })
@@ -126,7 +129,7 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
         disableRowSelectionOnClick 
          />
       </Box>
-    </Stack>
+     </Stack>
   );
 }
 

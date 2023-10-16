@@ -8,7 +8,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
-import * as React from 'react';
 import { useState } from 'react';
 import AutocompleteSearch from './AutoCompleteSearch';
 interface DialogProps{
@@ -20,6 +19,7 @@ interface DialogProps{
   selected: any | null;
   onDataSelect: (selectedData:any | null) => void; // seçili ürünü
   onUserAdd: (newUser: any) => void; // Kullanıcı ekleme işlevi
+  handleClickOpen: () => void;
 }
 
 export default function FormDialog(props:DialogProps) {
@@ -31,7 +31,7 @@ export default function FormDialog(props:DialogProps) {
     selected,
     onUserAdd,
    } = props;
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
@@ -52,14 +52,18 @@ export default function FormDialog(props:DialogProps) {
         password: password,
         permission: selected
       }
-      onUserAdd(newUser);
+      if (onUserAdd) {
+       onUserAdd(newUser);
+      }
       alert("Success");
+    handleClose();
     }else{
       alert("Please fill all fields");
+      handleClickOpen();
     }
     setUsername('');
     setPassword('');
-    handleClose();
+
   }
 
   return (

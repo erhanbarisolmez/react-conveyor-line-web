@@ -8,6 +8,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import type { DateRange } from '@mui/x-date-pickers-pro';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
+import { useState } from 'react';
 
 interface CustomDataGridProps {
   data: any[];
@@ -24,11 +25,13 @@ interface CustomDataGridProps {
 
 CustomDataGrid.defaultProps={
   showDeleteColumn: true,
-  showAddColumn: false,
+  showEditColumn: false,
   showCheckColumn: false,
+
 }
 
 export default function CustomDataGrid(props: CustomDataGridProps) {
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   const handleDeleteClick = (id:number) => {
     if (props && props.onDeleteClick) {
@@ -37,7 +40,9 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
   };
   function handleUsersEditClick(id: any): void {
     if (props && props.onShowEdit) {
+      setSelectedRowId(id);
       props.onShowEdit(id);
+      
     }
   }
 
@@ -88,23 +93,23 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
       width:100,
       renderCell:(params:any) => (
         <DeleteIcon 
-            onClick={()=>handleDeleteClick((params as any).row!.id)}  
+            onClick={()=>handleDeleteClick((params as any).row!.id) }  
         />
       ),
     });
   }
 
-  if(props.showEditColumn){
+  if (props.showEditColumn) {
     columns.push({
-      field:'edit',
+      field: 'edit',
       headerName: 'Edit',
-      width:100,
-      renderCell:(params:any) => (
-        <EditNoteOutlinedIcon 
-          onClick = {() => handleUsersEditClick((params as any).row!.id)}
+      width: 100,
+      renderCell: (params: any) => (
+        <EditNoteOutlinedIcon
+          onClick={() => handleUsersEditClick(params.row.id)}
         />
       ),
-    })
+    });
   }
 
   if(props.showCheckColumn){
@@ -113,9 +118,13 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
       headerName: 'Check',
       width:100,
       renderCell:(params:any) => (
-        <ContentPasteSearchOutlinedIcon 
+        <>
+                
+          <ContentPasteSearchOutlinedIcon 
           onClick = {() => handleUsersEditClick((params as any).row!.id)}
         />
+
+        </>
       ),
     })
   }
@@ -127,6 +136,7 @@ export default function CustomDataGrid(props: CustomDataGridProps) {
         rows={filterData(props.data, props.selectedData, props.filterColumn, props.selectedDate)} // seçili ürüne göre filtrelenmiş veri
         columns={columns}    
         disableRowSelectionOnClick 
+        isRowSelectable={(params) => !selectedRowId || params.id === selectedRowId}
          />
       </Box>
      </Stack>

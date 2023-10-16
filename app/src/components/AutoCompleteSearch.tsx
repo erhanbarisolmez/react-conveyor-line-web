@@ -16,8 +16,10 @@ AutocompleteSearch.defaultProps = {
 }
 
 export default function AutocompleteSearch(props:Props) {
+  
   const { width= "300px", data, onDataSelect, selected, textFieldVariant="outlined", textMargin,sx} = props;
   return (
+    
     <Autocomplete
       disablePortal
       id="combo-box-demo"

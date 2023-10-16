@@ -72,6 +72,9 @@ export class AuthService implements IAuthService{
   changePassword(username: string, newPassword: string): Promise<void> {
     throw new Error("Method not implemented.");
   }
+  edit( editedUser: string): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 
 }
 
